@@ -90,7 +90,7 @@ defmodule PlateSlateWeb.GraphQL.Schema.OrderingTypes do
         end
       end
 
-      trigger :complete_order, topic: fn
+      trigger [:ready_order, :complete_order], topic: fn
         %{order: order} ->
           [
             "order:#{order.id}",

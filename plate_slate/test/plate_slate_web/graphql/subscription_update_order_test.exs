@@ -173,7 +173,7 @@ defmodule PlateSlateWeb.GraphQL.Subscription.UpdateOrderTest do
       @ready_order_mutation,
       PlateSlateWeb.GraphQL.Schema,
       [
-        context: %{current_user: employee},
+        context: %{current_user: employee, pubsub: PlateSlateWeb.Endpoint},
         variables: %{"id" => order.id}
       ]
     )
@@ -184,7 +184,7 @@ defmodule PlateSlateWeb.GraphQL.Subscription.UpdateOrderTest do
       @complete_order_mutation,
       PlateSlateWeb.GraphQL.Schema,
       [
-        context: %{current_user: employee},
+        context: %{current_user: employee, pubsub: PlateSlateWeb.Endpoint},
         variables: %{"id" => order.id}
       ]
     )

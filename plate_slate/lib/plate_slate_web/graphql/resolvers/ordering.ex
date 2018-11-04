@@ -22,14 +22,6 @@ defmodule PlateSlateWeb.GraphQL.Resolvers.Ordering do
   def ready_order(_, %{id: id}, _) do
     order = Ordering.get_order!(id)
     with {:ok, order} <- Ordering.update_order(order, %{state: "ready"}) do
-      Absinthe.Subscription.publish(
-        PlateSlateWeb.Endpoint,
-        %{order: order},
-        update_order: [
-          "order:#{order.id}",
-          "of_customer:#{order.customer_number}:#{order.id}",
-        ]
-      )
       {:ok, %{order: order}}
     end
   end
@@ -37,14 +29,6 @@ defmodule PlateSlateWeb.GraphQL.Resolvers.Ordering do
   def complete_order(_, %{id: id}, _) do
     order = Ordering.get_order!(id)
     with {:ok, order} <- Ordering.update_order(order, %{state: "complete"}) do
-      #Absinthe.Subscription.publish(
-      #  PlateSlateWeb.Endpoint,
-      #  %{order: order},
-      #  update_order: [
-      #    "order:#{order.id}",
-      #    "of_customer:#{order.customer_number}:#{order.id}",
-      #  ]
-      #)
       {:ok, %{order: order}}
     end
   end
